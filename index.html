@@ -1,245 +1,365 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#111111">
 
-  <title>Matriz Project</title>
+<title>MATRIZ PROJECT</title>
 
-  <link rel="manifest" href="manifest.json">
+<style>
 
-  <style>
+/* =====================================================
+   RESET
+===================================================== */
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      color: #222;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #eeeeee;
+  color: #222;
+}
 
-    header {
-      background: #111;
-      color: white;
-      padding: 18px;
-      text-align: center;
-    }
+/* =====================================================
+   CABEÇALHO
+===================================================== */
 
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
+header {
+  background: #111;
+  color: white;
+  padding: 18px;
+  text-align: center;
+}
 
-    header p {
-      margin: 6px 0 0;
-      color: #bbb;
-      font-size: 13px;
-    }
+header h1 {
+  margin: 0;
+  font-size: 25px;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
+header p {
+  margin: 6px 0 0;
+  color: #bbbbbb;
+  font-size: 13px;
+}
 
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+/* =====================================================
+   CONTAINER
+===================================================== */
 
-    button,
-    input {
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      font-size: 15px;
-    }
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
 
-    button {
-      background: #111;
-      color: white;
-      cursor: pointer;
-    }
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
 
-    button:hover {
-      background: #333;
-    }
+.upload-box {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
 
-    input[type="text"] {
-      flex: 1;
-      min-width: 200px;
-      border: 1px solid #ccc;
-    }
+.upload-box h2 {
+  margin-top: 0;
+}
 
-    .upload-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
+input,
+button {
+  font-family: inherit;
+}
 
-    .upload-box h2 {
-      margin-top: 0;
-    }
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+}
 
-    .upload-box input {
-      width: 100%;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-    }
+/* =====================================================
+   BOTÕES
+===================================================== */
 
-    #projects {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fill, minmax(230px, 1fr));
-      gap: 20px;
-    }
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #111;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-    .project-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,.12);
-    }
+button:hover {
+  background: #333;
+}
 
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background: #ddd;
-    }
+button:active {
+  transform: scale(.97);
+}
 
-    .project-info {
-      padding: 15px;
-    }
+/* =====================================================
+   BARRA DE BUSCA
+===================================================== */
 
-    .project-info h3 {
-      margin: 0 0 8px;
-    }
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-    .project-info small {
-      color: #666;
-    }
+.toolbar input {
+  margin: 0;
+}
 
-    .card-buttons {
-      display: flex;
-      gap: 8px;
-      margin-top: 15px;
-    }
+/* =====================================================
+   PROJETOS
+===================================================== */
 
-    .projector {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: black;
-      z-index: 9999;
-      overflow: hidden;
-    }
+#projects {
+  display: grid;
+  grid-template-columns:
+  repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
 
-    .projector.active {
-      display: flex;
-      flex-direction: column;
-    }
+.project-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+}
 
-    .projector-controls {
-      background: #151515;
-      padding: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      z-index: 10;
-    }
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #dddddd;
+}
 
-    .projector-controls button {
-      background: #333;
-      font-size: 13px;
-      padding: 10px;
-    }
+.project-info {
+  padding: 15px;
+}
 
-    .projector-area {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
+.project-info h3 {
+  margin: 0 0 8px;
+}
 
-    #projectImage {
-      max-width: none;
-      max-height: none;
+.project-info small {
+  color: #666;
+}
 
-      transform-origin: center center;
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
 
-      user-select: none;
+/* =====================================================
+   MODO PROJETOR
+===================================================== */
 
-      transition: transform .1s;
-    }
+.projector {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+}
 
-    .calibration {
-      position: absolute;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      text-align: center;
-      font-size: 14px;
-      background: rgba(0,0,0,.7);
-      padding: 10px 20px;
-      border-radius: 8px;
-    }
+.projector.active {
+  display: flex;
+  flex-direction: column;
+}
 
-    .calibration-line {
-      width: 200px;
-      height: 4px;
-      background: red;
-      margin: 10px auto;
-    }
+/* =====================================================
+   CONTROLES DO PROJETOR
+===================================================== */
 
-    @media (max-width: 600px) {
+.projector-controls {
+  background: #151515;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  z-index: 20;
+}
 
-      .container {
-        padding: 12px;
-      }
+.projector-controls button {
+  background: #333;
+  padding: 10px 12px;
+  font-size: 13px;
+}
 
-      header h1 {
-        font-size: 20px;
-      }
+.projector-controls button:hover {
+  background: #555;
+}
 
-      .projector-controls {
-        justify-content: center;
-      }
+/* =====================================================
+   ZOOM MANUAL
+===================================================== */
 
-    }
+.manual-zoom-panel {
+  background: #222;
+  color: white;
+  padding: 12px 20px;
+  display: none;
+  align-items: center;
+  gap: 15px;
+  z-index: 20;
+}
 
-  </style>
+.manual-zoom-panel input {
+  flex: 1;
+  max-width: 700px;
+}
+
+#zoomValue {
+  min-width: 60px;
+  text-align: right;
+}
+
+/* =====================================================
+   ÁREA DE PROJEÇÃO
+===================================================== */
+
+.projector-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+/* =====================================================
+   IMAGEM
+===================================================== */
+
+#projectImage {
+  position: absolute;
+
+  max-width: none;
+  max-height: none;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  transform-origin: center center;
+
+  cursor: grab;
+}
+
+#projectImage.dragging {
+  cursor: grabbing;
+}
+
+/* =====================================================
+   CALIBRAÇÃO
+===================================================== */
+
+.calibration {
+  position: absolute;
+
+  bottom: 25px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  background: rgba(0,0,0,.75);
+
+  padding: 12px 20px;
+
+  border-radius: 10px;
+
+  z-index: 30;
+}
+
+.calibration-line {
+  width: 200px;
+  height: 4px;
+
+  background: red;
+
+  margin: 10px auto;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 12px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  .projector-controls {
+    justify-content: center;
+  }
+
+  .manual-zoom-panel {
+    padding: 10px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
+
+
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
 <header>
 
   <h1>📐 MATRIZ PROJECT</h1>
 
-  <p>Biblioteca e projeção para corte, vinco e traçado de matrizes</p>
+  <p>
+    Biblioteca e projeção para corte,
+    vinco e traçado de matrizes
+  </p>
 
 </header>
 
 
+<!-- =====================================================
+     BIBLIOTECA
+===================================================== -->
+
 <div class="container">
+
 
   <div class="upload-box">
 
-    <h2>Novo Projeto</h2>
+    <h2>📁 Novo Projeto</h2>
 
     <input
       type="text"
@@ -252,9 +372,7 @@
       accept="image/*">
 
     <button onclick="saveProject()">
-
       💾 Salvar Projeto
-
     </button>
 
   </div>
@@ -269,9 +387,7 @@
       oninput="renderProjects()">
 
     <button onclick="renderProjects()">
-
       🔄 Atualizar
-
     </button>
 
   </div>
@@ -279,40 +395,107 @@
 
   <div id="projects"></div>
 
+
 </div>
 
 
+<!-- =====================================================
+     MODO PROJETOR
+===================================================== -->
 
-<!-- MODO PROJETOR -->
+<div
+  class="projector"
+  id="projector">
 
-<div class="projector" id="projector">
+
+  <!-- CONTROLES -->
 
   <div class="projector-controls">
 
-    <button onclick="zoomIn()">➕ Zoom</button>
+    <button onclick="autoFit()">
+      🎯 Enquadrar Auto
+    </button>
 
-    <button onclick="zoomOut()">➖ Zoom</button>
+    <button onclick="toggleManualZoom()">
+      🔎 Zoom Manual
+    </button>
 
-    <button onclick="rotateLeft()">↺</button>
+    <button onclick="zoomIn()">
+      ➕ Zoom
+    </button>
 
-    <button onclick="rotateRight()">↻</button>
+    <button onclick="zoomOut()">
+      ➖ Zoom
+    </button>
 
-    <button onclick="mirrorImage()">↔ Espelhar</button>
+    <button onclick="rotateLeft()">
+      ↺
+    </button>
 
-    <button onclick="toggleLock()">🔓 Travar</button>
+    <button onclick="rotateRight()">
+      ↻
+    </button>
 
-    <button onclick="toggleCalibration()">📏 Calibrar</button>
+    <button onclick="mirrorImage()">
+      ↔ Espelhar
+    </button>
 
-    <button onclick="fullscreen()">⛶ Tela Cheia</button>
+    <button onclick="toggleLock()">
+      🔓 Travar
+    </button>
 
-    <button onclick="closeProjector()">✖ Fechar</button>
+    <button onclick="toggleCalibration()">
+      📏 Calibrar
+    </button>
+
+    <button onclick="toggleFullscreen()">
+      ⛶ Tela Cheia
+    </button>
+
+    <button onclick="closeProjector()">
+      ✖ Fechar
+    </button>
 
   </div>
 
 
-  <div class="projector-area">
+  <!-- ZOOM MANUAL -->
 
-    <img id="projectImage">
+  <div
+    class="manual-zoom-panel"
+    id="manualZoomPanel">
+
+    <span>🔎 Zoom</span>
+
+    <input
+      type="range"
+      id="zoomSlider"
+      min="0.05"
+      max="5"
+      step="0.01"
+      value="1"
+      oninput="manualZoom(this.value)">
+
+    <span id="zoomValue">
+      100%
+    </span>
+
+  </div>
+
+
+  <!-- ÁREA DE PROJEÇÃO -->
+
+  <div
+    class="projector-area"
+    id="projectorArea">
+
+
+    <img
+      id="projectImage"
+      draggable="false">
+
+
+    <!-- CALIBRAÇÃO -->
 
     <div
       class="calibration"
@@ -323,11 +506,14 @@
 
       <div class="calibration-line"></div>
 
-      Ajuste o zoom até a linha corresponder à medida definida.
+      Ajuste o zoom até a linha projetada
+      corresponder à medida desejada.
 
     </div>
 
+
   </div>
+
 
 </div>
 
@@ -336,23 +522,29 @@
 <script>
 
 /* =====================================================
-   MATRIZ PROJECT
-   BANCO DE DADOS INDEXEDDB
+   BANCO DE DADOS
 ===================================================== */
 
 let db;
 
-const request = indexedDB.open(
-  "MatrizProjectDB",
-  1
-);
+const databaseRequest =
+  indexedDB.open(
+    "MatrizProjectDB",
+    1
+  );
 
 
-request.onupgradeneeded = function(event) {
+databaseRequest.onupgradeneeded =
+function(event) {
 
   db = event.target.result;
 
-  if (!db.objectStoreNames.contains("projects")) {
+
+  if (
+    !db.objectStoreNames.contains(
+      "projects"
+    )
+  ) {
 
     db.createObjectStore(
       "projects",
@@ -367,7 +559,8 @@ request.onupgradeneeded = function(event) {
 };
 
 
-request.onsuccess = function(event) {
+databaseRequest.onsuccess =
+function(event) {
 
   db = event.target.result;
 
@@ -376,9 +569,12 @@ request.onsuccess = function(event) {
 };
 
 
-request.onerror = function() {
+databaseRequest.onerror =
+function() {
 
-  alert("Erro ao iniciar banco de dados.");
+  alert(
+    "Erro ao iniciar o banco de dados."
+  );
 
 };
 
@@ -391,25 +587,35 @@ request.onerror = function() {
 function saveProject() {
 
   const name =
-    document.getElementById("projectName").value;
+    document
+      .getElementById("projectName")
+      .value
+      .trim();
+
 
   const file =
-    document.getElementById("projectFile").files[0];
+    document
+      .getElementById("projectFile")
+      .files[0];
 
 
   if (!name || !file) {
 
-    alert("Informe o nome e selecione uma imagem.");
+    alert(
+      "Informe o nome e selecione uma imagem."
+    );
 
     return;
 
   }
 
 
-  const reader = new FileReader();
+  const reader =
+    new FileReader();
 
 
-  reader.onload = function(event) {
+  reader.onload =
+  function(event) {
 
     const transaction =
       db.transaction(
@@ -419,29 +625,44 @@ function saveProject() {
 
 
     const store =
-      transaction.objectStore("projects");
+      transaction.objectStore(
+        "projects"
+      );
 
 
     store.add({
 
       name: name,
 
-      image: event.target.result,
+      image:
+        event.target.result,
 
-      date: new Date().toLocaleString()
+      date:
+        new Date()
+        .toLocaleString("pt-BR")
 
     });
 
 
-    transaction.oncomplete = function() {
+    transaction.oncomplete =
+    function() {
 
-      document.getElementById("projectName").value = "";
+      document
+        .getElementById("projectName")
+        .value = "";
 
-      document.getElementById("projectFile").value = "";
+
+      document
+        .getElementById("projectFile")
+        .value = "";
+
 
       renderProjects();
 
-      alert("Projeto salvo com sucesso!");
+
+      alert(
+        "Projeto salvo com sucesso!"
+      );
 
     };
 
@@ -460,8 +681,13 @@ function saveProject() {
 
 function renderProjects() {
 
+  if (!db)
+    return;
+
+
   const container =
-    document.getElementById("projects");
+    document
+      .getElementById("projects");
 
 
   container.innerHTML = "";
@@ -482,14 +708,17 @@ function renderProjects() {
 
 
   const store =
-    transaction.objectStore("projects");
+    transaction.objectStore(
+      "projects"
+    );
 
 
   const request =
     store.openCursor();
 
 
-  request.onsuccess = function(event) {
+  request.onsuccess =
+  function(event) {
 
     const cursor =
       event.target.result;
@@ -503,8 +732,8 @@ function renderProjects() {
 
       if (
         project.name
-          .toLowerCase()
-          .includes(search)
+        .toLowerCase()
+        .includes(search)
       ) {
 
         const card =
@@ -517,11 +746,15 @@ function renderProjects() {
 
         card.innerHTML = `
 
-          <img src="${project.image}">
+          <img
+            src="${project.image}"
+            alt="${project.name}">
 
           <div class="project-info">
 
-            <h3>${project.name}</h3>
+            <h3>
+              ${project.name}
+            </h3>
 
             <small>
               ${project.date}
@@ -529,16 +762,18 @@ function renderProjects() {
 
             <div class="card-buttons">
 
-              <button onclick="openProject(${project.id})">
+              <button
+                onclick="openProject(${project.id})">
 
                 🔦 Projetar
 
               </button>
 
 
-              <button onclick="deleteProject(${project.id})">
+              <button
+                onclick="deleteProject(${project.id})">
 
-                🗑️
+                🗑️ Excluir
 
               </button>
 
@@ -558,6 +793,19 @@ function renderProjects() {
 
     }
 
+
+    else if (
+      container.innerHTML === ""
+    ) {
+
+      container.innerHTML = `
+        <p>
+          Nenhum projeto encontrado.
+        </p>
+      `;
+
+    }
+
   };
 
 }
@@ -570,12 +818,15 @@ function renderProjects() {
 
 function deleteProject(id) {
 
-  const confirmDelete =
-    confirm("Deseja excluir este projeto?");
+  if (
+    !confirm(
+      "Deseja realmente excluir este projeto?"
+    )
+  ) {
 
-
-  if (!confirmDelete)
     return;
+
+  }
 
 
   const transaction =
@@ -586,7 +837,9 @@ function deleteProject(id) {
 
 
   const store =
-    transaction.objectStore("projects");
+    transaction.objectStore(
+      "projects"
+    );
 
 
   store.delete(id);
@@ -600,7 +853,7 @@ function deleteProject(id) {
 
 
 /* =====================================================
-   ABRIR PROJETOR
+   ABRIR PROJETO
 ===================================================== */
 
 function openProject(id) {
@@ -613,23 +866,25 @@ function openProject(id) {
 
 
   const store =
-    transaction.objectStore("projects");
+    transaction.objectStore(
+      "projects"
+    );
 
 
   const request =
     store.get(id);
 
 
-  request.onsuccess = function() {
+  request.onsuccess =
+  function() {
 
     const project =
       request.result;
 
 
-    document
-      .getElementById("projectImage")
-      .src =
-      project.image;
+    const image =
+      document
+        .getElementById("projectImage");
 
 
     document
@@ -638,7 +893,22 @@ function openProject(id) {
       .add("active");
 
 
-    resetTransform();
+    image.onload =
+    function() {
+
+      resetTransform();
+
+
+      setTimeout(
+        autoFit,
+        100
+      );
+
+    };
+
+
+    image.src =
+      project.image;
 
   };
 
@@ -647,7 +917,7 @@ function openProject(id) {
 
 
 /* =====================================================
-   CONTROLE DA IMAGEM
+   ESTADO DA IMAGEM
 ===================================================== */
 
 let scale = 1;
@@ -658,22 +928,44 @@ let mirrored = false;
 
 let locked = false;
 
+let positionX = 0;
 
+let positionY = 0;
+
+
+
+/* =====================================================
+   ATUALIZAR TRANSFORMAÇÃO
+===================================================== */
 
 function updateTransform() {
 
   const image =
-    document.getElementById("projectImage");
+    document
+      .getElementById("projectImage");
 
 
   const mirror =
-    mirrored ? -1 : 1;
+    mirrored
+      ? -1
+      : 1;
 
 
   image.style.transform = `
 
-    scale(${scale * mirror}, ${scale})
-    rotate(${rotation}deg)
+    translate(
+      ${positionX}px,
+      ${positionY}px
+    )
+
+    scale(
+      ${scale * mirror},
+      ${scale}
+    )
+
+    rotate(
+      ${rotation}deg
+    )
 
   `;
 
@@ -681,38 +973,238 @@ function updateTransform() {
 
 
 
+/* =====================================================
+   ENQUADRAMENTO AUTOMÁTICO
+===================================================== */
+
+function autoFit() {
+
+  if (locked)
+    return;
+
+
+  const image =
+    document
+      .getElementById("projectImage");
+
+
+  const area =
+    document
+      .getElementById("projectorArea");
+
+
+  if (
+    !image.naturalWidth ||
+    !image.naturalHeight
+  ) {
+
+    return;
+
+  }
+
+
+  const areaWidth =
+    area.clientWidth;
+
+
+  const areaHeight =
+    area.clientHeight;
+
+
+  const imageWidth =
+    image.naturalWidth;
+
+
+  const imageHeight =
+    image.naturalHeight;
+
+
+  const scaleX =
+    areaWidth / imageWidth;
+
+
+  const scaleY =
+    areaHeight / imageHeight;
+
+
+  scale =
+    Math.min(
+      scaleX,
+      scaleY
+    ) * 0.95;
+
+
+  positionX = 0;
+
+  positionY = 0;
+
+  rotation = 0;
+
+  mirrored = false;
+
+
+  updateTransform();
+
+  updateZoomSlider();
+
+}
+
+
+
+/* =====================================================
+   ZOOM MANUAL
+===================================================== */
+
+function toggleManualZoom() {
+
+  const panel =
+    document
+      .getElementById(
+        "manualZoomPanel"
+      );
+
+
+  if (
+    panel.style.display ===
+    "flex"
+  ) {
+
+    panel.style.display =
+      "none";
+
+  }
+
+  else {
+
+    panel.style.display =
+      "flex";
+
+  }
+
+}
+
+
+
+function manualZoom(value) {
+
+  if (locked)
+    return;
+
+
+  scale =
+    parseFloat(value);
+
+
+  updateTransform();
+
+  updateZoomValue();
+
+}
+
+
+
+function updateZoomSlider() {
+
+  const slider =
+    document
+      .getElementById(
+        "zoomSlider"
+      );
+
+
+  slider.value =
+    Math.min(
+      Math.max(
+        scale,
+        parseFloat(slider.min)
+      ),
+      parseFloat(slider.max)
+    );
+
+
+  updateZoomValue();
+
+}
+
+
+
+function updateZoomValue() {
+
+  document
+    .getElementById(
+      "zoomValue"
+    )
+    .textContent =
+
+    Math.round(
+      scale * 100
+    ) + "%";
+
+}
+
+
+
+/* =====================================================
+   ZOOM +
+===================================================== */
+
 function zoomIn() {
 
-  if (locked) return;
+  if (locked)
+    return;
+
 
   scale += 0.1;
 
+
   updateTransform();
+
+  updateZoomSlider();
 
 }
 
 
+
+/* =====================================================
+   ZOOM -
+===================================================== */
 
 function zoomOut() {
 
-  if (locked) return;
+  if (locked)
+    return;
+
 
   scale -= 0.1;
 
-  if (scale < 0.1)
-    scale = 0.1;
+
+  if (scale < 0.05) {
+
+    scale = 0.05;
+
+  }
+
 
   updateTransform();
+
+  updateZoomSlider();
 
 }
 
 
 
+/* =====================================================
+   ROTAÇÃO
+===================================================== */
+
 function rotateLeft() {
 
-  if (locked) return;
+  if (locked)
+    return;
+
 
   rotation -= 90;
+
 
   updateTransform();
 
@@ -722,21 +1214,32 @@ function rotateLeft() {
 
 function rotateRight() {
 
-  if (locked) return;
+  if (locked)
+    return;
+
 
   rotation += 90;
 
+
   updateTransform();
 
 }
 
 
+
+/* =====================================================
+   ESPELHAR
+===================================================== */
 
 function mirrorImage() {
 
-  if (locked) return;
+  if (locked)
+    return;
 
-  mirrored = !mirrored;
+
+  mirrored =
+    !mirrored;
+
 
   updateTransform();
 
@@ -744,24 +1247,55 @@ function mirrorImage() {
 
 
 
+/* =====================================================
+   TRAVAR
+===================================================== */
+
 function toggleLock() {
 
-  locked = !locked;
+  locked =
+    !locked;
+
+
+  const image =
+    document
+      .getElementById(
+        "projectImage"
+      );
+
+
+  if (locked) {
+
+    image.style.cursor =
+      "not-allowed";
+
+  }
+
+  else {
+
+    image.style.cursor =
+      "grab";
+
+  }
 
 
   alert(
 
     locked
 
-      ? "Imagem travada."
+      ? "🔒 Imagem travada."
 
-      : "Imagem destravada."
+      : "🔓 Imagem destravada."
 
   );
 
 }
 
 
+
+/* =====================================================
+   RESET
+===================================================== */
 
 function resetTransform() {
 
@@ -773,7 +1307,14 @@ function resetTransform() {
 
   locked = false;
 
+  positionX = 0;
+
+  positionY = 0;
+
+
   updateTransform();
+
+  updateZoomSlider();
 
 }
 
@@ -786,12 +1327,16 @@ function resetTransform() {
 function toggleCalibration() {
 
   const calibration =
-    document.getElementById("calibration");
+    document
+      .getElementById(
+        "calibration"
+      );
 
 
   calibration.style.display =
 
-    calibration.style.display === "none"
+    calibration.style.display ===
+    "none"
 
       ? "block"
 
@@ -802,20 +1347,32 @@ function toggleCalibration() {
 
 
 /* =====================================================
-   FULLSCREEN
+   TELA CHEIA
 ===================================================== */
 
-function fullscreen() {
+function toggleFullscreen() {
 
   const projector =
-    document.getElementById("projector");
+    document
+      .getElementById(
+        "projector"
+      );
 
 
   if (
     !document.fullscreenElement
   ) {
 
-    projector.requestFullscreen();
+    projector
+      .requestFullscreen()
+      .catch(() => {});
+
+  }
+
+  else {
+
+    document
+      .exitFullscreen();
 
   }
 
@@ -830,14 +1387,19 @@ function fullscreen() {
 function closeProjector() {
 
   document
-    .getElementById("projector")
+    .getElementById(
+      "projector"
+    )
     .classList
     .remove("active");
 
 
-  if (document.fullscreenElement) {
+  if (
+    document.fullscreenElement
+  ) {
 
-    document.exitFullscreen();
+    document
+      .exitFullscreen();
 
   }
 
@@ -846,18 +1408,234 @@ function closeProjector() {
 
 
 /* =====================================================
+   ARRASTAR IMAGEM
+===================================================== */
+
+const image =
+  document
+    .getElementById(
+      "projectImage"
+    );
+
+
+let dragging = false;
+
+let startX = 0;
+
+let startY = 0;
+
+let initialX = 0;
+
+let initialY = 0;
+
+
+
+/* MOUSE */
+
+image.addEventListener(
+  "mousedown",
+  function(event) {
+
+    if (locked)
+      return;
+
+
+    dragging = true;
+
+
+    image.classList.add(
+      "dragging"
+    );
+
+
+    startX =
+      event.clientX;
+
+
+    startY =
+      event.clientY;
+
+
+    initialX =
+      positionX;
+
+
+    initialY =
+      positionY;
+
+  }
+);
+
+
+window.addEventListener(
+  "mousemove",
+  function(event) {
+
+    if (
+      !dragging ||
+      locked
+    )
+      return;
+
+
+    positionX =
+
+      initialX +
+      (
+        event.clientX -
+        startX
+      );
+
+
+    positionY =
+
+      initialY +
+      (
+        event.clientY -
+        startY
+      );
+
+
+    updateTransform();
+
+  }
+);
+
+
+window.addEventListener(
+  "mouseup",
+  function() {
+
+    dragging = false;
+
+
+    image.classList.remove(
+      "dragging"
+    );
+
+  }
+);
+
+
+
+/* =====================================================
+   TOQUE - ARRASTAR
+===================================================== */
+
+image.addEventListener(
+  "touchstart",
+  function(event) {
+
+    if (
+      locked ||
+      event.touches.length !== 1
+    )
+      return;
+
+
+    dragging = true;
+
+
+    const touch =
+      event.touches[0];
+
+
+    startX =
+      touch.clientX;
+
+
+    startY =
+      touch.clientY;
+
+
+    initialX =
+      positionX;
+
+
+    initialY =
+      positionY;
+
+  },
+  { passive: false }
+);
+
+
+image.addEventListener(
+  "touchmove",
+  function(event) {
+
+    if (
+      !dragging ||
+      locked ||
+      event.touches.length !== 1
+    )
+      return;
+
+
+    event.preventDefault();
+
+
+    const touch =
+      event.touches[0];
+
+
+    positionX =
+
+      initialX +
+      (
+        touch.clientX -
+        startX
+      );
+
+
+    positionY =
+
+      initialY +
+      (
+        touch.clientY -
+        startY
+      );
+
+
+    updateTransform();
+
+  },
+  { passive: false }
+);
+
+
+image.addEventListener(
+  "touchend",
+  function() {
+
+    dragging = false;
+
+  }
+);
+
+
+
+/* =====================================================
    SERVICE WORKER
 ===================================================== */
 
-if ("serviceWorker" in navigator) {
+if (
+  "serviceWorker"
+  in navigator
+) {
 
   navigator
     .serviceWorker
-    .register("sw.js");
+    .register(
+      "sw.js"
+    )
+    .catch(
+      console.error
+    );
 
 }
 
 </script>
 
 </body>
-  </html>
+</html>
